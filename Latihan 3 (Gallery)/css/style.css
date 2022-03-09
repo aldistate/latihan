@@ -1,0 +1,186 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 36px;
+    background-color: #eee;
+}
+
+h1 {
+    font-size: 50px;
+    margin: 50px 0;
+    text-align: center;
+    text-shadow: 2px 2px 3px white;
+}
+
+.container {
+    width: 600px;
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.gallery {
+    position: relative;
+}
+
+.gallery li,
+.gallery img,
+.gallery li span {
+    border-radius: 50%;
+}
+
+.gallery li {
+    list-style: none;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border: 5px solid #666;
+    display: inline-block;
+    margin-right: 16px;
+}
+
+.gallery li span {
+    display: block;
+    width: 123px;
+    height: 127px;
+    background-color: rgba(200, 200, 200, 0.5);
+    position: absolute;
+    top: 0;
+    text-align: center;
+    line-height: 120px;
+    color: #333;
+    text-shadow: 1px 1px 1px #ddd;
+    opacity: 0;
+    transform: scale(0) rotate(0);
+    transition: 0.3s;
+}
+
+.gallery li a:hover span {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+}
+
+
+/* overlay */
+
+.overlay {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: 0.8s;
+    z-index: 2;
+    text-align: center;
+    padding: 40px;
+}
+
+.overlay:target {
+    width: auto;
+    height: auto;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.overlay img {
+    max-height: 100%;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+}
+
+.overlay:target img {
+    animation-name: zoom;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+
+}
+
+.overlay .close {
+    opacity: 0;
+    position: absolute;
+    color: red;
+    text-decoration: none;
+    top: 9px;
+    left: 50%;
+    margin-left: -40px;
+    background-color: white;
+    border: 1px solid black;
+    line-height: 20px;
+    padding: 3px;
+}
+
+.overlay:target .close {
+    animation-name: close;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+    opacity: 1;
+}
+
+.overlay:target .next,
+.overlay:target .prev {
+    animation-name: nextprev;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+    opacity: 1;
+}
+
+
+
+/* navigasi */
+.next,
+.prev {
+    width: 57px;
+    height: 93px;
+    background-image: url(/img/next.png);
+    position: absolute;
+    text-indent: -9999px;
+    top: 40%;
+    margin-left: 50px;
+    opacity: 0;
+}
+
+.prev {
+    background-image: url(/img/prev.png);
+    margin-left: -100px;
+}
+
+
+/* animasi */
+@keyframes nextprev {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(0) rotate(720deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes close {
+    0% {
+        opacity: 0;
+        margin-top: -20px;
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
